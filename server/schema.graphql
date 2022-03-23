@@ -1,0 +1,440 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type Campaign {
+  campaignApplications(orderBy: [CampaignApplicationOrderByInput!], skip: Float, take: Float, where: CampaignApplicationWhereInput): [CampaignApplication!]!
+  createdAt: DateTime!
+  id: String!
+  title: String
+  updatedAt: DateTime!
+  user: User
+}
+
+type CampaignApplication {
+  campaign: Campaign
+  createdAt: DateTime!
+  id: String!
+  updatedAt: DateTime!
+  users(orderBy: [UserOrderByInput!], skip: Float, take: Float, where: UserWhereInput): [User!]!
+}
+
+input CampaignApplicationCreateInput {
+  campaign: CampaignWhereUniqueInput
+  users: UserCreateNestedManyWithoutCampaignApplicationsInput
+}
+
+input CampaignApplicationCreateNestedManyWithoutCampaignsInput {
+  connect: [CampaignApplicationWhereUniqueInput!]
+}
+
+input CampaignApplicationListRelationFilter {
+  every: CampaignApplicationWhereInput
+  none: CampaignApplicationWhereInput
+  some: CampaignApplicationWhereInput
+}
+
+input CampaignApplicationOrderByInput {
+  campaignId: SortOrder
+  createdAt: SortOrder
+  id: SortOrder
+  updatedAt: SortOrder
+}
+
+input CampaignApplicationUpdateInput {
+  campaign: CampaignWhereUniqueInput
+  users: UserUpdateManyWithoutCampaignApplicationsInput
+}
+
+input CampaignApplicationUpdateManyWithoutCampaignsInput {
+  connect: [CampaignApplicationWhereUniqueInput!]
+  disconnect: [CampaignApplicationWhereUniqueInput!]
+  set: [CampaignApplicationWhereUniqueInput!]
+}
+
+input CampaignApplicationWhereInput {
+  campaign: CampaignWhereUniqueInput
+  id: StringFilter
+  users: UserListRelationFilter
+}
+
+input CampaignApplicationWhereUniqueInput {
+  id: String!
+}
+
+input CampaignCreateInput {
+  campaignApplications: CampaignApplicationCreateNestedManyWithoutCampaignsInput
+  title: String
+  user: UserWhereUniqueInput
+}
+
+input CampaignCreateNestedManyWithoutUsersInput {
+  connect: [CampaignWhereUniqueInput!]
+}
+
+input CampaignListRelationFilter {
+  every: CampaignWhereInput
+  none: CampaignWhereInput
+  some: CampaignWhereInput
+}
+
+input CampaignOrderByInput {
+  createdAt: SortOrder
+  id: SortOrder
+  title: SortOrder
+  updatedAt: SortOrder
+  userId: SortOrder
+}
+
+input CampaignUpdateInput {
+  campaignApplications: CampaignApplicationUpdateManyWithoutCampaignsInput
+  title: String
+  user: UserWhereUniqueInput
+}
+
+input CampaignUpdateManyWithoutUsersInput {
+  connect: [CampaignWhereUniqueInput!]
+  disconnect: [CampaignWhereUniqueInput!]
+  set: [CampaignWhereUniqueInput!]
+}
+
+input CampaignWhereInput {
+  campaignApplications: CampaignApplicationListRelationFilter
+  id: StringFilter
+  title: StringNullableFilter
+  user: UserWhereUniqueInput
+}
+
+input CampaignWhereUniqueInput {
+  id: String!
+}
+
+type Coupon {
+  code: String
+  createdAt: DateTime!
+  id: String!
+  percentage: Float
+  updatedAt: DateTime!
+}
+
+input CouponCreateInput {
+  code: String
+  percentage: Float
+}
+
+input CouponOrderByInput {
+  code: SortOrder
+  createdAt: SortOrder
+  id: SortOrder
+  percentage: SortOrder
+  updatedAt: SortOrder
+}
+
+input CouponUpdateInput {
+  code: String
+  percentage: Float
+}
+
+input CouponWhereInput {
+  code: StringNullableFilter
+  id: StringFilter
+  percentage: FloatNullableFilter
+}
+
+input CouponWhereUniqueInput {
+  id: String!
+}
+
+input Credentials {
+  password: String!
+  username: String!
+}
+
+"""
+A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
+"""
+scalar DateTime
+
+input FloatNullableFilter {
+  equals: Float
+  gt: Float
+  gte: Float
+  in: [Float!]
+  lt: Float
+  lte: Float
+  not: Float
+  notIn: [Float!]
+}
+
+type MetaQueryPayload {
+  count: String!
+}
+
+type Mutation {
+  createCampaign(data: CampaignCreateInput!): Campaign!
+  createCampaignApplication(data: CampaignApplicationCreateInput!): CampaignApplication!
+  createCoupon(data: CouponCreateInput!): Coupon!
+  createOrder(data: OrderCreateInput!): Order!
+  createSubscription(data: SubscriptionCreateInput!): Subscription!
+  createUser(data: UserCreateInput!): User!
+  deleteCampaign(where: CampaignWhereUniqueInput!): Campaign!
+  deleteCampaignApplication(where: CampaignApplicationWhereUniqueInput!): CampaignApplication!
+  deleteCoupon(where: CouponWhereUniqueInput!): Coupon!
+  deleteOrder(where: OrderWhereUniqueInput!): Order!
+  deleteSubscription(where: SubscriptionWhereUniqueInput!): Subscription!
+  deleteUser(where: UserWhereUniqueInput!): User!
+  login(credentials: Credentials!): UserInfo!
+  updateCampaign(data: CampaignUpdateInput!, where: CampaignWhereUniqueInput!): Campaign!
+  updateCampaignApplication(data: CampaignApplicationUpdateInput!, where: CampaignApplicationWhereUniqueInput!): CampaignApplication!
+  updateCoupon(data: CouponUpdateInput!, where: CouponWhereUniqueInput!): Coupon!
+  updateOrder(data: OrderUpdateInput!, where: OrderWhereUniqueInput!): Order!
+  updateSubscription(data: SubscriptionUpdateInput!, where: SubscriptionWhereUniqueInput!): Subscription!
+  updateUser(data: UserUpdateInput!, where: UserWhereUniqueInput!): User!
+}
+
+type Order {
+  createdAt: DateTime!
+  id: String!
+  subscription: Subscription
+  updatedAt: DateTime!
+  user: User
+}
+
+input OrderCreateInput {
+  subscription: SubscriptionWhereUniqueInput
+  user: UserWhereUniqueInput
+}
+
+input OrderCreateNestedManyWithoutSubscriptionsInput {
+  connect: [OrderWhereUniqueInput!]
+}
+
+input OrderCreateNestedManyWithoutUsersInput {
+  connect: [OrderWhereUniqueInput!]
+}
+
+input OrderListRelationFilter {
+  every: OrderWhereInput
+  none: OrderWhereInput
+  some: OrderWhereInput
+}
+
+input OrderOrderByInput {
+  createdAt: SortOrder
+  id: SortOrder
+  subscriptionId: SortOrder
+  updatedAt: SortOrder
+  userId: SortOrder
+}
+
+input OrderUpdateInput {
+  subscription: SubscriptionWhereUniqueInput
+  user: UserWhereUniqueInput
+}
+
+input OrderUpdateManyWithoutSubscriptionsInput {
+  connect: [OrderWhereUniqueInput!]
+  disconnect: [OrderWhereUniqueInput!]
+  set: [OrderWhereUniqueInput!]
+}
+
+input OrderUpdateManyWithoutUsersInput {
+  connect: [OrderWhereUniqueInput!]
+  disconnect: [OrderWhereUniqueInput!]
+  set: [OrderWhereUniqueInput!]
+}
+
+input OrderWhereInput {
+  id: StringFilter
+  subscription: SubscriptionWhereUniqueInput
+  user: UserWhereUniqueInput
+}
+
+input OrderWhereUniqueInput {
+  id: String!
+}
+
+type Query {
+  _campaignApplicationsMeta(orderBy: [CampaignApplicationOrderByInput!], skip: Float, take: Float, where: CampaignApplicationWhereInput): MetaQueryPayload!
+  _campaignsMeta(orderBy: [CampaignOrderByInput!], skip: Float, take: Float, where: CampaignWhereInput): MetaQueryPayload!
+  _couponsMeta(orderBy: [CouponOrderByInput!], skip: Float, take: Float, where: CouponWhereInput): MetaQueryPayload!
+  _ordersMeta(orderBy: [OrderOrderByInput!], skip: Float, take: Float, where: OrderWhereInput): MetaQueryPayload!
+  _subscriptionsMeta(orderBy: [SubscriptionOrderByInput!], skip: Float, take: Float, where: SubscriptionWhereInput): MetaQueryPayload!
+  _usersMeta(orderBy: [UserOrderByInput!], skip: Float, take: Float, where: UserWhereInput): MetaQueryPayload!
+  campaign(where: CampaignWhereUniqueInput!): Campaign
+  campaignApplication(where: CampaignApplicationWhereUniqueInput!): CampaignApplication
+  campaignApplications(orderBy: [CampaignApplicationOrderByInput!], skip: Float, take: Float, where: CampaignApplicationWhereInput): [CampaignApplication!]!
+  campaigns(orderBy: [CampaignOrderByInput!], skip: Float, take: Float, where: CampaignWhereInput): [Campaign!]!
+  coupon(where: CouponWhereUniqueInput!): Coupon
+  coupons(orderBy: [CouponOrderByInput!], skip: Float, take: Float, where: CouponWhereInput): [Coupon!]!
+  order(where: OrderWhereUniqueInput!): Order
+  orders(orderBy: [OrderOrderByInput!], skip: Float, take: Float, where: OrderWhereInput): [Order!]!
+  subscription(where: SubscriptionWhereUniqueInput!): Subscription
+  subscriptions(orderBy: [SubscriptionOrderByInput!], skip: Float, take: Float, where: SubscriptionWhereInput): [Subscription!]!
+  user(where: UserWhereUniqueInput!): User
+  userInfo: UserInfo!
+  users(orderBy: [UserOrderByInput!], skip: Float, take: Float, where: UserWhereInput): [User!]!
+}
+
+enum QueryMode {
+  Default
+  Insensitive
+}
+
+enum SortOrder {
+  Asc
+  Desc
+}
+
+input StringFilter {
+  contains: String
+  endsWith: String
+  equals: String
+  gt: String
+  gte: String
+  in: [String!]
+  lt: String
+  lte: String
+  mode: QueryMode
+  not: String
+  notIn: [String!]
+  startsWith: String
+}
+
+input StringNullableFilter {
+  contains: String
+  endsWith: String
+  equals: String
+  gt: String
+  gte: String
+  in: [String!]
+  lt: String
+  lte: String
+  mode: QueryMode
+  not: String
+  notIn: [String!]
+  startsWith: String
+}
+
+type Subscription {
+  createdAt: DateTime!
+  id: String!
+  orders(orderBy: [OrderOrderByInput!], skip: Float, take: Float, where: OrderWhereInput): [Order!]!
+  price: Float
+  tier: String
+  updatedAt: DateTime!
+}
+
+input SubscriptionCreateInput {
+  orders: OrderCreateNestedManyWithoutSubscriptionsInput
+  price: Float
+  tier: String
+}
+
+input SubscriptionOrderByInput {
+  createdAt: SortOrder
+  id: SortOrder
+  price: SortOrder
+  tier: SortOrder
+  updatedAt: SortOrder
+}
+
+input SubscriptionUpdateInput {
+  orders: OrderUpdateManyWithoutSubscriptionsInput
+  price: Float
+  tier: String
+}
+
+input SubscriptionWhereInput {
+  id: StringFilter
+  orders: OrderListRelationFilter
+  price: FloatNullableFilter
+  tier: StringNullableFilter
+}
+
+input SubscriptionWhereUniqueInput {
+  id: String!
+}
+
+type User {
+  campaignApplication: CampaignApplication
+  campaigns(orderBy: [CampaignOrderByInput!], skip: Float, take: Float, where: CampaignWhereInput): [Campaign!]!
+  createdAt: DateTime!
+  firstName: String
+  id: String!
+  lastName: String
+  orders(orderBy: [OrderOrderByInput!], skip: Float, take: Float, where: OrderWhereInput): [Order!]!
+  roles: [String!]!
+  updatedAt: DateTime!
+  username: String!
+}
+
+input UserCreateInput {
+  campaignApplication: CampaignApplicationWhereUniqueInput
+  campaigns: CampaignCreateNestedManyWithoutUsersInput
+  firstName: String
+  lastName: String
+  orders: OrderCreateNestedManyWithoutUsersInput
+  password: String!
+  roles: [String!]!
+  username: String!
+}
+
+input UserCreateNestedManyWithoutCampaignApplicationsInput {
+  connect: [UserWhereUniqueInput!]
+}
+
+type UserInfo {
+  accessToken: String
+  roles: [String!]!
+  username: String!
+}
+
+input UserListRelationFilter {
+  every: UserWhereInput
+  none: UserWhereInput
+  some: UserWhereInput
+}
+
+input UserOrderByInput {
+  campaignApplicationId: SortOrder
+  createdAt: SortOrder
+  firstName: SortOrder
+  id: SortOrder
+  lastName: SortOrder
+  password: SortOrder
+  roles: SortOrder
+  updatedAt: SortOrder
+  username: SortOrder
+}
+
+input UserUpdateInput {
+  campaignApplication: CampaignApplicationWhereUniqueInput
+  campaigns: CampaignUpdateManyWithoutUsersInput
+  firstName: String
+  lastName: String
+  orders: OrderUpdateManyWithoutUsersInput
+  password: String
+  roles: [String!]
+  username: String
+}
+
+input UserUpdateManyWithoutCampaignApplicationsInput {
+  connect: [UserWhereUniqueInput!]
+  disconnect: [UserWhereUniqueInput!]
+  set: [UserWhereUniqueInput!]
+}
+
+input UserWhereInput {
+  campaignApplication: CampaignApplicationWhereUniqueInput
+  campaigns: CampaignListRelationFilter
+  firstName: StringNullableFilter
+  id: StringFilter
+  lastName: StringNullableFilter
+  orders: OrderListRelationFilter
+  username: StringFilter
+}
+
+input UserWhereUniqueInput {
+  id: String!
+}

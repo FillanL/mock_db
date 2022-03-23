@@ -1,0 +1,19 @@
+{
+  "dataServiceGeneratorVersion": "0.12.1",
+  "appInfo": {
+    "name": "creattur",
+    "description": "",
+    "version": "92w5s8ov",
+    "id": "cl12bsddc90756401s60bnor011",
+    "url": "https://app.amplication.com/cl12bsddc90756401s60bnor011",
+    "settings": {
+      "dbHost": "localhost",
+      "dbName": "",
+      "dbPassword": "admin",
+      "dbPort": 5432,
+      "dbUser": "admin",
+      "appId": "cl12bsddc90756401s60bnor011",
+      "authProvider": "Jwt"
+    }
+  }
+}
