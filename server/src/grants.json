@@ -1,6 +1,6 @@
 [
   {
-    "role": "admin",
+    "role": "Admin",
     "resource": "User",
     "action": "read:own",
     "attributes": "*"
@@ -12,7 +12,7 @@
     "attributes": "*"
   },
   {
-    "role": "admin",
+    "role": "Admin",
     "resource": "User",
     "action": "create:any",
     "attributes": "*"
@@ -24,7 +24,7 @@
     "attributes": "*"
   },
   {
-    "role": "admin",
+    "role": "Admin",
     "resource": "User",
     "action": "update:any",
     "attributes": "*"
@@ -36,7 +36,7 @@
     "attributes": "*"
   },
   {
-    "role": "admin",
+    "role": "Admin",
     "resource": "User",
     "action": "delete:any",
     "attributes": "*"
@@ -48,7 +48,7 @@
     "attributes": "*"
   },
   {
-    "role": "admin",
+    "role": "Admin",
     "resource": "User",
     "action": "read:any",
     "attributes": "*"
@@ -60,7 +60,7 @@
     "attributes": "*"
   },
   {
-    "role": "admin",
+    "role": "Admin",
     "resource": "Campaign",
     "action": "read:own",
     "attributes": "*"
@@ -78,7 +78,7 @@
     "attributes": "*"
   },
   {
-    "role": "admin",
+    "role": "Admin",
     "resource": "Campaign",
     "action": "update:any",
     "attributes": "*"
@@ -90,7 +90,7 @@
     "attributes": "*"
   },
   {
-    "role": "admin",
+    "role": "Admin",
     "resource": "Campaign",
     "action": "delete:any",
     "attributes": "*"
@@ -102,7 +102,7 @@
     "attributes": "*"
   },
   {
-    "role": "admin",
+    "role": "Admin",
     "resource": "Campaign",
     "action": "read:any",
     "attributes": "*"
@@ -114,7 +114,7 @@
     "attributes": "*"
   },
   {
-    "role": "admin",
+    "role": "Admin",
     "resource": "CampaignApplication",
     "action": "read:own",
     "attributes": "*"
@@ -126,7 +126,7 @@
     "attributes": "*"
   },
   {
-    "role": "admin",
+    "role": "Admin",
     "resource": "CampaignApplication",
     "action": "create:any",
     "attributes": "*"
@@ -138,7 +138,7 @@
     "attributes": "*"
   },
   {
-    "role": "admin",
+    "role": "Admin",
     "resource": "CampaignApplication",
     "action": "update:any",
     "attributes": "*"
@@ -150,7 +150,7 @@
     "attributes": "*"
   },
   {
-    "role": "admin",
+    "role": "Admin",
     "resource": "CampaignApplication",
     "action": "delete:any",
     "attributes": "*"
@@ -162,7 +162,7 @@
     "attributes": "*"
   },
   {
-    "role": "admin",
+    "role": "Admin",
     "resource": "CampaignApplication",
     "action": "read:any",
     "attributes": "*"
@@ -174,7 +174,7 @@
     "attributes": "*"
   },
   {
-    "role": "admin",
+    "role": "Admin",
     "resource": "Subscription",
     "action": "read:own",
     "attributes": "*"
@@ -186,7 +186,7 @@
     "attributes": "*"
   },
   {
-    "role": "admin",
+    "role": "Admin",
     "resource": "Subscription",
     "action": "create:any",
     "attributes": "*"
@@ -198,7 +198,7 @@
     "attributes": "*"
   },
   {
-    "role": "admin",
+    "role": "Admin",
     "resource": "Subscription",
     "action": "update:any",
     "attributes": "*"
@@ -210,7 +210,7 @@
     "attributes": "*"
   },
   {
-    "role": "admin",
+    "role": "Admin",
     "resource": "Subscription",
     "action": "delete:any",
     "attributes": "*"
@@ -222,7 +222,7 @@
     "attributes": "*"
   },
   {
-    "role": "admin",
+    "role": "Admin",
     "resource": "Subscription",
     "action": "read:any",
     "attributes": "*"
@@ -234,7 +234,7 @@
     "attributes": "*"
   },
   {
-    "role": "admin",
+    "role": "Admin",
     "resource": "Coupon",
     "action": "read:own",
     "attributes": "*"
@@ -246,7 +246,7 @@
     "attributes": "*"
   },
   {
-    "role": "admin",
+    "role": "Admin",
     "resource": "Coupon",
     "action": "create:any",
     "attributes": "*"
@@ -258,7 +258,7 @@
     "attributes": "*"
   },
   {
-    "role": "admin",
+    "role": "Admin",
     "resource": "Coupon",
     "action": "update:any",
     "attributes": "*"
@@ -270,7 +270,7 @@
     "attributes": "*"
   },
   {
-    "role": "admin",
+    "role": "Admin",
     "resource": "Coupon",
     "action": "delete:any",
     "attributes": "*"
@@ -282,7 +282,7 @@
     "attributes": "*"
   },
   {
-    "role": "admin",
+    "role": "Admin",
     "resource": "Coupon",
     "action": "read:any",
     "attributes": "*"
@@ -294,7 +294,7 @@
     "attributes": "*"
   },
   {
-    "role": "admin",
+    "role": "Admin",
     "resource": "Order",
     "action": "read:own",
     "attributes": "*"
@@ -306,7 +306,7 @@
     "attributes": "*"
   },
   {
-    "role": "admin",
+    "role": "Admin",
     "resource": "Order",
     "action": "create:any",
     "attributes": "*"
@@ -318,7 +318,7 @@
     "attributes": "*"
   },
   {
-    "role": "admin",
+    "role": "Admin",
     "resource": "Order",
     "action": "update:any",
     "attributes": "*"
@@ -330,7 +330,7 @@
     "attributes": "*"
   },
   {
-    "role": "admin",
+    "role": "Admin",
     "resource": "Order",
     "action": "delete:any",
     "attributes": "*"
@@ -342,7 +342,7 @@
     "attributes": "*"
   },
   {
-    "role": "admin",
+    "role": "Admin",
     "resource": "Order",
     "action": "read:any",
     "attributes": "*"

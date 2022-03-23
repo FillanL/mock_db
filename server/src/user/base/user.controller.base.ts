@@ -350,6 +350,7 @@ export class UserControllerBase {
       ...query,
       select: {
         createdAt: true,
+        description: true,
         id: true,
         title: true,
         updatedAt: true,
