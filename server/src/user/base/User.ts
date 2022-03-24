@@ -11,31 +11,11 @@ https://docs.amplication.com/docs/how-to/custom-code
   */
 import { ObjectType, Field } from "@nestjs/graphql";
 import { ApiProperty } from "@nestjs/swagger";
-import { CampaignApplication } from "../../campaignApplication/base/CampaignApplication";
-import { ValidateNested, IsOptional, IsDate, IsString } from "class-validator";
+import { IsDate, IsString, IsOptional, ValidateNested } from "class-validator";
 import { Type } from "class-transformer";
-import { Campaign } from "../../campaign/base/Campaign";
-import { Order } from "../../order/base/Order";
+import { Project } from "../../project/base/Project";
 @ObjectType()
 class User {
-  @ApiProperty({
-    required: false,
-    type: () => CampaignApplication,
-  })
-  @ValidateNested()
-  @Type(() => CampaignApplication)
-  @IsOptional()
-  campaignApplication?: CampaignApplication | null;
-
-  @ApiProperty({
-    required: false,
-    type: () => [Campaign],
-  })
-  @ValidateNested()
-  @Type(() => Campaign)
-  @IsOptional()
-  campaigns?: Array<Campaign>;
-
   @ApiProperty({
     required: true,
   })
@@ -76,12 +56,12 @@ class User {
 
   @ApiProperty({
     required: false,
-    type: () => [Order],
+    type: () => [Project],
   })
   @ValidateNested()
-  @Type(() => Order)
+  @Type(() => Project)
   @IsOptional()
-  orders?: Array<Order>;
+  projects?: Array<Project>;
 
   @ApiProperty({
     required: true,
