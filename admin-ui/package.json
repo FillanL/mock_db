@@ -1,5 +1,5 @@
 {
-  "name": "@creattur/admin",
+  "name": "@mock-tst/admin",
   "private": true,
   "dependencies": {
     "@apollo/client": "3.3.18",

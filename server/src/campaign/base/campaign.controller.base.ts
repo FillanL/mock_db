@@ -84,6 +84,7 @@ export class CampaignControllerBase {
       },
       select: {
         createdAt: true,
+        description: true,
         id: true,
         title: true,
         updatedAt: true,
@@ -127,6 +128,7 @@ export class CampaignControllerBase {
       ...args,
       select: {
         createdAt: true,
+        description: true,
         id: true,
         title: true,
         updatedAt: true,
@@ -169,6 +171,7 @@ export class CampaignControllerBase {
       where: params,
       select: {
         createdAt: true,
+        description: true,
         id: true,
         title: true,
         updatedAt: true,
@@ -240,6 +243,7 @@ export class CampaignControllerBase {
         },
         select: {
           createdAt: true,
+          description: true,
           id: true,
           title: true,
           updatedAt: true,
@@ -283,6 +287,7 @@ export class CampaignControllerBase {
         where: params,
         select: {
           createdAt: true,
+          description: true,
           id: true,
           title: true,
           updatedAt: true,

@@ -14,8 +14,8 @@ import { ApiProperty } from "@nestjs/swagger";
 import { CampaignApplicationListRelationFilter } from "../../campaignApplication/base/CampaignApplicationListRelationFilter";
 import { ValidateNested, IsOptional } from "class-validator";
 import { Type } from "class-transformer";
-import { StringFilter } from "../../util/StringFilter";
 import { StringNullableFilter } from "../../util/StringNullableFilter";
+import { StringFilter } from "../../util/StringFilter";
 import { UserWhereUniqueInput } from "../../user/base/UserWhereUniqueInput";
 @InputType()
 class CampaignWhereInput {
@@ -30,6 +30,17 @@ class CampaignWhereInput {
     nullable: true,
   })
   campaignApplications?: CampaignApplicationListRelationFilter;
+
+  @ApiProperty({
+    required: false,
+    type: StringNullableFilter,
+  })
+  @Type(() => StringNullableFilter)
+  @IsOptional()
+  @Field(() => StringNullableFilter, {
+    nullable: true,
+  })
+  description?: StringNullableFilter;
 
   @ApiProperty({
     required: false,

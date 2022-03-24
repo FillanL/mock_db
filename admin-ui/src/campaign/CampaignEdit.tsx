@@ -13,6 +13,7 @@ export const CampaignEdit = (props: EditProps): React.ReactElement => {
   return (
     <Edit {...props}>
       <SimpleForm>
+        <TextInput label="description" multiline source="description" />
         <TextInput label="Title" source="title" />
         <ReferenceInput source="user.id" reference="User" label="user">
           <SelectInput optionText={UserTitle} />
