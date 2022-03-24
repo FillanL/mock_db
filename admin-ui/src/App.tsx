@@ -9,26 +9,10 @@ import { UserList } from "./user/UserList";
 import { UserCreate } from "./user/UserCreate";
 import { UserEdit } from "./user/UserEdit";
 import { UserShow } from "./user/UserShow";
-import { CampaignList } from "./campaign/CampaignList";
-import { CampaignCreate } from "./campaign/CampaignCreate";
-import { CampaignEdit } from "./campaign/CampaignEdit";
-import { CampaignShow } from "./campaign/CampaignShow";
-import { CampaignApplicationList } from "./campaignApplication/CampaignApplicationList";
-import { CampaignApplicationCreate } from "./campaignApplication/CampaignApplicationCreate";
-import { CampaignApplicationEdit } from "./campaignApplication/CampaignApplicationEdit";
-import { CampaignApplicationShow } from "./campaignApplication/CampaignApplicationShow";
-import { SubscriptionList } from "./subscription/SubscriptionList";
-import { SubscriptionCreate } from "./subscription/SubscriptionCreate";
-import { SubscriptionEdit } from "./subscription/SubscriptionEdit";
-import { SubscriptionShow } from "./subscription/SubscriptionShow";
-import { CouponList } from "./coupon/CouponList";
-import { CouponCreate } from "./coupon/CouponCreate";
-import { CouponEdit } from "./coupon/CouponEdit";
-import { CouponShow } from "./coupon/CouponShow";
-import { OrderList } from "./order/OrderList";
-import { OrderCreate } from "./order/OrderCreate";
-import { OrderEdit } from "./order/OrderEdit";
-import { OrderShow } from "./order/OrderShow";
+import { ProjectList } from "./project/ProjectList";
+import { ProjectCreate } from "./project/ProjectCreate";
+import { ProjectEdit } from "./project/ProjectEdit";
+import { ProjectShow } from "./project/ProjectShow";
 import { jwtAuthProvider } from "./auth-provider/ra-auth-jwt";
 
 const App = (): React.ReactElement => {
@@ -48,7 +32,7 @@ const App = (): React.ReactElement => {
   return (
     <div className="App">
       <Admin
-        title={"creattur"}
+        title={"My app"}
         dataProvider={dataProvider}
         authProvider={jwtAuthProvider}
         theme={theme}
@@ -63,39 +47,11 @@ const App = (): React.ReactElement => {
           show={UserShow}
         />
         <Resource
-          name="Campaign"
-          list={CampaignList}
-          edit={CampaignEdit}
-          create={CampaignCreate}
-          show={CampaignShow}
-        />
-        <Resource
-          name="CampaignApplication"
-          list={CampaignApplicationList}
-          edit={CampaignApplicationEdit}
-          create={CampaignApplicationCreate}
-          show={CampaignApplicationShow}
-        />
-        <Resource
-          name="Subscription"
-          list={SubscriptionList}
-          edit={SubscriptionEdit}
-          create={SubscriptionCreate}
-          show={SubscriptionShow}
-        />
-        <Resource
-          name="Coupon"
-          list={CouponList}
-          edit={CouponEdit}
-          create={CouponCreate}
-          show={CouponShow}
-        />
-        <Resource
-          name="Order"
-          list={OrderList}
-          edit={OrderEdit}
-          create={OrderCreate}
-          show={OrderShow}
+          name="Project"
+          list={ProjectList}
+          edit={ProjectEdit}
+          create={ProjectCreate}
+          show={ProjectShow}
         />
       </Admin>
     </div>

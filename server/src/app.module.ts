@@ -1,10 +1,6 @@
 import { Module } from "@nestjs/common";
 import { UserModule } from "./user/user.module";
-import { CampaignModule } from "./campaign/campaign.module";
-import { CampaignApplicationModule } from "./campaignApplication/campaignApplication.module";
-import { SubscriptionModule } from "./subscription/subscription.module";
-import { CouponModule } from "./coupon/coupon.module";
-import { OrderModule } from "./order/order.module";
+import { ProjectModule } from "./project/project.module";
 import { ACLModule } from "./auth/acl.module";
 import { AuthModule } from "./auth/auth.module";
 import { HealthModule } from "./health/health.module";
@@ -19,11 +15,7 @@ import { GraphQLModule } from "@nestjs/graphql";
   controllers: [],
   imports: [
     UserModule,
-    CampaignModule,
-    CampaignApplicationModule,
-    SubscriptionModule,
-    CouponModule,
-    OrderModule,
+    ProjectModule,
     ACLModule,
     AuthModule,
     HealthModule,

@@ -27,12 +27,9 @@ import { UserWhereUniqueInput } from "./UserWhereUniqueInput";
 import { UserFindManyArgs } from "./UserFindManyArgs";
 import { UserUpdateInput } from "./UserUpdateInput";
 import { User } from "./User";
-import { CampaignFindManyArgs } from "../../campaign/base/CampaignFindManyArgs";
-import { Campaign } from "../../campaign/base/Campaign";
-import { CampaignWhereUniqueInput } from "../../campaign/base/CampaignWhereUniqueInput";
-import { OrderFindManyArgs } from "../../order/base/OrderFindManyArgs";
-import { Order } from "../../order/base/Order";
-import { OrderWhereUniqueInput } from "../../order/base/OrderWhereUniqueInput";
+import { ProjectFindManyArgs } from "../../project/base/ProjectFindManyArgs";
+import { Project } from "../../project/base/Project";
+import { ProjectWhereUniqueInput } from "../../project/base/ProjectWhereUniqueInput";
 @swagger.ApiBearerAuth()
 export class UserControllerBase {
   constructor(
@@ -76,22 +73,8 @@ export class UserControllerBase {
       );
     }
     return await this.service.create({
-      data: {
-        ...data,
-
-        campaignApplication: data.campaignApplication
-          ? {
-              connect: data.campaignApplication,
-            }
-          : undefined,
-      },
+      data: data,
       select: {
-        campaignApplication: {
-          select: {
-            id: true,
-          },
-        },
-
         createdAt: true,
         firstName: true,
         id: true,
@@ -132,12 +115,6 @@ export class UserControllerBase {
     const results = await this.service.findMany({
       ...args,
       select: {
-        campaignApplication: {
-          select: {
-            id: true,
-          },
-        },
-
         createdAt: true,
         firstName: true,
         id: true,
@@ -177,12 +154,6 @@ export class UserControllerBase {
     const result = await this.service.findOne({
       where: params,
       select: {
-        campaignApplication: {
-          select: {
-            id: true,
-          },
-        },
-
         createdAt: true,
         firstName: true,
         id: true,
@@ -241,22 +212,8 @@ export class UserControllerBase {
     try {
       return await this.service.update({
         where: params,
-        data: {
-          ...data,
-
-          campaignApplication: data.campaignApplication
-            ? {
-                connect: data.campaignApplication,
-              }
-            : undefined,
-        },
+        data: data,
         select: {
-          campaignApplication: {
-            select: {
-              id: true,
-            },
-          },
-
           createdAt: true,
           firstName: true,
           id: true,
@@ -297,12 +254,6 @@ export class UserControllerBase {
       return await this.service.delete({
         where: params,
         select: {
-          campaignApplication: {
-            select: {
-              id: true,
-            },
-          },
-
           createdAt: true,
           firstName: true,
           id: true,
@@ -327,32 +278,34 @@ export class UserControllerBase {
     defaultAuthGuard.DefaultAuthGuard,
     nestAccessControl.ACGuard
   )
-  @common.Get("/:id/campaigns")
+  @common.Get("/:id/projects")
   @nestAccessControl.UseRoles({
     resource: "User",
     action: "read",
     possession: "any",
   })
-  @ApiNestedQuery(CampaignFindManyArgs)
-  async findManyCampaigns(
+  @ApiNestedQuery(ProjectFindManyArgs)
+  async findManyProjects(
     @common.Req() request: Request,
     @common.Param() params: UserWhereUniqueInput,
     @nestAccessControl.UserRoles() userRoles: string[]
-  ): Promise<Campaign[]> {
-    const query = plainToClass(CampaignFindManyArgs, request.query);
+  ): Promise<Project[]> {
+    const query = plainToClass(ProjectFindManyArgs, request.query);
     const permission = this.rolesBuilder.permission({
       role: userRoles,
       action: "read",
       possession: "any",
-      resource: "Campaign",
+      resource: "Project",
     });
-    const results = await this.service.findCampaigns(params.id, {
+    const results = await this.service.findProjects(params.id, {
       ...query,
       select: {
         createdAt: true,
         id: true,
+        imgUrl: true,
         title: true,
         updatedAt: true,
+        url: true,
 
         user: {
           select: {
@@ -374,19 +327,19 @@ export class UserControllerBase {
     defaultAuthGuard.DefaultAuthGuard,
     nestAccessControl.ACGuard
   )
-  @common.Post("/:id/campaigns")
+  @common.Post("/:id/projects")
   @nestAccessControl.UseRoles({
     resource: "User",
     action: "update",
     possession: "any",
   })
-  async createCampaigns(
+  async createProjects(
     @common.Param() params: UserWhereUniqueInput,
     @common.Body() body: UserWhereUniqueInput[],
     @nestAccessControl.UserRoles() userRoles: string[]
   ): Promise<void> {
     const data = {
-      campaigns: {
+      projects: {
         connect: body,
       },
     };
@@ -419,19 +372,19 @@ export class UserControllerBase {
     defaultAuthGuard.DefaultAuthGuard,
     nestAccessControl.ACGuard
   )
-  @common.Patch("/:id/campaigns")
+  @common.Patch("/:id/projects")
   @nestAccessControl.UseRoles({
     resource: "User",
     action: "update",
     possession: "any",
   })
-  async updateCampaigns(
+  async updateProjects(
     @common.Param() params: UserWhereUniqueInput,
-    @common.Body() body: CampaignWhereUniqueInput[],
+    @common.Body() body: ProjectWhereUniqueInput[],
     @nestAccessControl.UserRoles() userRoles: string[]
   ): Promise<void> {
     const data = {
-      campaigns: {
+      projects: {
         set: body,
       },
     };
@@ -464,207 +417,19 @@ export class UserControllerBase {
     defaultAuthGuard.DefaultAuthGuard,
     nestAccessControl.ACGuard
   )
-  @common.Delete("/:id/campaigns")
+  @common.Delete("/:id/projects")
   @nestAccessControl.UseRoles({
     resource: "User",
     action: "update",
     possession: "any",
   })
-  async deleteCampaigns(
+  async deleteProjects(
     @common.Param() params: UserWhereUniqueInput,
     @common.Body() body: UserWhereUniqueInput[],
     @nestAccessControl.UserRoles() userRoles: string[]
   ): Promise<void> {
     const data = {
-      campaigns: {
-        disconnect: body,
-      },
-    };
-    const permission = this.rolesBuilder.permission({
-      role: userRoles,
-      action: "update",
-      possession: "any",
-      resource: "User",
-    });
-    const invalidAttributes = abacUtil.getInvalidAttributes(permission, data);
-    if (invalidAttributes.length) {
-      const roles = userRoles
-        .map((role: string) => JSON.stringify(role))
-        .join(",");
-      throw new common.ForbiddenException(
-        `Updating the relationship: ${
-          invalidAttributes[0]
-        } of ${"User"} is forbidden for roles: ${roles}`
-      );
-    }
-    await this.service.update({
-      where: params,
-      data,
-      select: { id: true },
-    });
-  }
-
-  @common.UseInterceptors(nestMorgan.MorganInterceptor("combined"))
-  @common.UseGuards(
-    defaultAuthGuard.DefaultAuthGuard,
-    nestAccessControl.ACGuard
-  )
-  @common.Get("/:id/orders")
-  @nestAccessControl.UseRoles({
-    resource: "User",
-    action: "read",
-    possession: "any",
-  })
-  @ApiNestedQuery(OrderFindManyArgs)
-  async findManyOrders(
-    @common.Req() request: Request,
-    @common.Param() params: UserWhereUniqueInput,
-    @nestAccessControl.UserRoles() userRoles: string[]
-  ): Promise<Order[]> {
-    const query = plainToClass(OrderFindManyArgs, request.query);
-    const permission = this.rolesBuilder.permission({
-      role: userRoles,
-      action: "read",
-      possession: "any",
-      resource: "Order",
-    });
-    const results = await this.service.findOrders(params.id, {
-      ...query,
-      select: {
-        createdAt: true,
-        id: true,
-
-        subscription: {
-          select: {
-            id: true,
-          },
-        },
-
-        updatedAt: true,
-
-        user: {
-          select: {
-            id: true,
-          },
-        },
-      },
-    });
-    if (results === null) {
-      throw new errors.NotFoundException(
-        `No resource was found for ${JSON.stringify(params)}`
-      );
-    }
-    return results.map((result) => permission.filter(result));
-  }
-
-  @common.UseInterceptors(nestMorgan.MorganInterceptor("combined"))
-  @common.UseGuards(
-    defaultAuthGuard.DefaultAuthGuard,
-    nestAccessControl.ACGuard
-  )
-  @common.Post("/:id/orders")
-  @nestAccessControl.UseRoles({
-    resource: "User",
-    action: "update",
-    possession: "any",
-  })
-  async createOrders(
-    @common.Param() params: UserWhereUniqueInput,
-    @common.Body() body: UserWhereUniqueInput[],
-    @nestAccessControl.UserRoles() userRoles: string[]
-  ): Promise<void> {
-    const data = {
-      orders: {
-        connect: body,
-      },
-    };
-    const permission = this.rolesBuilder.permission({
-      role: userRoles,
-      action: "update",
-      possession: "any",
-      resource: "User",
-    });
-    const invalidAttributes = abacUtil.getInvalidAttributes(permission, data);
-    if (invalidAttributes.length) {
-      const roles = userRoles
-        .map((role: string) => JSON.stringify(role))
-        .join(",");
-      throw new common.ForbiddenException(
-        `Updating the relationship: ${
-          invalidAttributes[0]
-        } of ${"User"} is forbidden for roles: ${roles}`
-      );
-    }
-    await this.service.update({
-      where: params,
-      data,
-      select: { id: true },
-    });
-  }
-
-  @common.UseInterceptors(nestMorgan.MorganInterceptor("combined"))
-  @common.UseGuards(
-    defaultAuthGuard.DefaultAuthGuard,
-    nestAccessControl.ACGuard
-  )
-  @common.Patch("/:id/orders")
-  @nestAccessControl.UseRoles({
-    resource: "User",
-    action: "update",
-    possession: "any",
-  })
-  async updateOrders(
-    @common.Param() params: UserWhereUniqueInput,
-    @common.Body() body: OrderWhereUniqueInput[],
-    @nestAccessControl.UserRoles() userRoles: string[]
-  ): Promise<void> {
-    const data = {
-      orders: {
-        set: body,
-      },
-    };
-    const permission = this.rolesBuilder.permission({
-      role: userRoles,
-      action: "update",
-      possession: "any",
-      resource: "User",
-    });
-    const invalidAttributes = abacUtil.getInvalidAttributes(permission, data);
-    if (invalidAttributes.length) {
-      const roles = userRoles
-        .map((role: string) => JSON.stringify(role))
-        .join(",");
-      throw new common.ForbiddenException(
-        `Updating the relationship: ${
-          invalidAttributes[0]
-        } of ${"User"} is forbidden for roles: ${roles}`
-      );
-    }
-    await this.service.update({
-      where: params,
-      data,
-      select: { id: true },
-    });
-  }
-
-  @common.UseInterceptors(nestMorgan.MorganInterceptor("combined"))
-  @common.UseGuards(
-    defaultAuthGuard.DefaultAuthGuard,
-    nestAccessControl.ACGuard
-  )
-  @common.Delete("/:id/orders")
-  @nestAccessControl.UseRoles({
-    resource: "User",
-    action: "update",
-    possession: "any",
-  })
-  async deleteOrders(
-    @common.Param() params: UserWhereUniqueInput,
-    @common.Body() body: UserWhereUniqueInput[],
-    @nestAccessControl.UserRoles() userRoles: string[]
-  ): Promise<void> {
-    const data = {
-      orders: {
+      projects: {
         disconnect: body,
       },
     };

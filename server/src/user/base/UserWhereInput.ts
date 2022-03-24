@@ -11,39 +11,13 @@ https://docs.amplication.com/docs/how-to/custom-code
   */
 import { InputType, Field } from "@nestjs/graphql";
 import { ApiProperty } from "@nestjs/swagger";
-import { CampaignApplicationWhereUniqueInput } from "../../campaignApplication/base/CampaignApplicationWhereUniqueInput";
-import { ValidateNested, IsOptional } from "class-validator";
-import { Type } from "class-transformer";
-import { CampaignListRelationFilter } from "../../campaign/base/CampaignListRelationFilter";
 import { StringNullableFilter } from "../../util/StringNullableFilter";
+import { Type } from "class-transformer";
+import { IsOptional, ValidateNested } from "class-validator";
 import { StringFilter } from "../../util/StringFilter";
-import { OrderListRelationFilter } from "../../order/base/OrderListRelationFilter";
+import { ProjectListRelationFilter } from "../../project/base/ProjectListRelationFilter";
 @InputType()
 class UserWhereInput {
-  @ApiProperty({
-    required: false,
-    type: () => CampaignApplicationWhereUniqueInput,
-  })
-  @ValidateNested()
-  @Type(() => CampaignApplicationWhereUniqueInput)
-  @IsOptional()
-  @Field(() => CampaignApplicationWhereUniqueInput, {
-    nullable: true,
-  })
-  campaignApplication?: CampaignApplicationWhereUniqueInput;
-
-  @ApiProperty({
-    required: false,
-    type: () => CampaignListRelationFilter,
-  })
-  @ValidateNested()
-  @Type(() => CampaignListRelationFilter)
-  @IsOptional()
-  @Field(() => CampaignListRelationFilter, {
-    nullable: true,
-  })
-  campaigns?: CampaignListRelationFilter;
-
   @ApiProperty({
     required: false,
     type: StringNullableFilter,
@@ -79,15 +53,15 @@ class UserWhereInput {
 
   @ApiProperty({
     required: false,
-    type: () => OrderListRelationFilter,
+    type: () => ProjectListRelationFilter,
   })
   @ValidateNested()
-  @Type(() => OrderListRelationFilter)
+  @Type(() => ProjectListRelationFilter)
   @IsOptional()
-  @Field(() => OrderListRelationFilter, {
+  @Field(() => ProjectListRelationFilter, {
     nullable: true,
   })
-  orders?: OrderListRelationFilter;
+  projects?: ProjectListRelationFilter;
 
   @ApiProperty({
     required: false,

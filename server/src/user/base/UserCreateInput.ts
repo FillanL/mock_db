@@ -11,37 +11,11 @@ https://docs.amplication.com/docs/how-to/custom-code
   */
 import { InputType, Field } from "@nestjs/graphql";
 import { ApiProperty } from "@nestjs/swagger";
-import { CampaignApplicationWhereUniqueInput } from "../../campaignApplication/base/CampaignApplicationWhereUniqueInput";
-import { ValidateNested, IsOptional, IsString } from "class-validator";
+import { IsString, IsOptional, ValidateNested } from "class-validator";
+import { ProjectCreateNestedManyWithoutUsersInput } from "./ProjectCreateNestedManyWithoutUsersInput";
 import { Type } from "class-transformer";
-import { CampaignCreateNestedManyWithoutUsersInput } from "./CampaignCreateNestedManyWithoutUsersInput";
-import { OrderCreateNestedManyWithoutUsersInput } from "./OrderCreateNestedManyWithoutUsersInput";
 @InputType()
 class UserCreateInput {
-  @ApiProperty({
-    required: false,
-    type: () => CampaignApplicationWhereUniqueInput,
-  })
-  @ValidateNested()
-  @Type(() => CampaignApplicationWhereUniqueInput)
-  @IsOptional()
-  @Field(() => CampaignApplicationWhereUniqueInput, {
-    nullable: true,
-  })
-  campaignApplication?: CampaignApplicationWhereUniqueInput | null;
-
-  @ApiProperty({
-    required: false,
-    type: () => CampaignCreateNestedManyWithoutUsersInput,
-  })
-  @ValidateNested()
-  @Type(() => CampaignCreateNestedManyWithoutUsersInput)
-  @IsOptional()
-  @Field(() => CampaignCreateNestedManyWithoutUsersInput, {
-    nullable: true,
-  })
-  campaigns?: CampaignCreateNestedManyWithoutUsersInput;
-
   @ApiProperty({
     required: false,
     type: String,
@@ -65,24 +39,24 @@ class UserCreateInput {
   lastName?: string | null;
 
   @ApiProperty({
-    required: false,
-    type: () => OrderCreateNestedManyWithoutUsersInput,
-  })
-  @ValidateNested()
-  @Type(() => OrderCreateNestedManyWithoutUsersInput)
-  @IsOptional()
-  @Field(() => OrderCreateNestedManyWithoutUsersInput, {
-    nullable: true,
-  })
-  orders?: OrderCreateNestedManyWithoutUsersInput;
-
-  @ApiProperty({
     required: true,
     type: String,
   })
   @IsString()
   @Field(() => String)
   password!: string;
+
+  @ApiProperty({
+    required: false,
+    type: () => ProjectCreateNestedManyWithoutUsersInput,
+  })
+  @ValidateNested()
+  @Type(() => ProjectCreateNestedManyWithoutUsersInput)
+  @IsOptional()
+  @Field(() => ProjectCreateNestedManyWithoutUsersInput, {
+    nullable: true,
+  })
+  projects?: ProjectCreateNestedManyWithoutUsersInput;
 
   @ApiProperty({
     required: true,

@@ -25,11 +25,8 @@ import { DeleteUserArgs } from "./DeleteUserArgs";
 import { UserFindManyArgs } from "./UserFindManyArgs";
 import { UserFindUniqueArgs } from "./UserFindUniqueArgs";
 import { User } from "./User";
-import { CampaignFindManyArgs } from "../../campaign/base/CampaignFindManyArgs";
-import { Campaign } from "../../campaign/base/Campaign";
-import { OrderFindManyArgs } from "../../order/base/OrderFindManyArgs";
-import { Order } from "../../order/base/Order";
-import { CampaignApplication } from "../../campaignApplication/base/CampaignApplication";
+import { ProjectFindManyArgs } from "../../project/base/ProjectFindManyArgs";
+import { Project } from "../../project/base/Project";
 import { UserService } from "../user.service";
 
 @graphql.Resolver(() => User)
@@ -136,15 +133,7 @@ export class UserResolverBase {
     // @ts-ignore
     return await this.service.create({
       ...args,
-      data: {
-        ...args.data,
-
-        campaignApplication: args.data.campaignApplication
-          ? {
-              connect: args.data.campaignApplication,
-            }
-          : undefined,
-      },
+      data: args.data,
     });
   }
 
@@ -183,15 +172,7 @@ export class UserResolverBase {
       // @ts-ignore
       return await this.service.update({
         ...args,
-        data: {
-          ...args.data,
-
-          campaignApplication: args.data.campaignApplication
-            ? {
-                connect: args.data.campaignApplication,
-              }
-            : undefined,
-        },
+        data: args.data,
       });
     } catch (error) {
       if (isRecordNotFoundError(error)) {
@@ -223,79 +204,29 @@ export class UserResolverBase {
     }
   }
 
-  @graphql.ResolveField(() => [Campaign])
+  @graphql.ResolveField(() => [Project])
   @nestAccessControl.UseRoles({
     resource: "User",
     action: "read",
     possession: "any",
   })
-  async campaigns(
+  async projects(
     @graphql.Parent() parent: User,
-    @graphql.Args() args: CampaignFindManyArgs,
+    @graphql.Args() args: ProjectFindManyArgs,
     @gqlUserRoles.UserRoles() userRoles: string[]
-  ): Promise<Campaign[]> {
+  ): Promise<Project[]> {
     const permission = this.rolesBuilder.permission({
       role: userRoles,
       action: "read",
       possession: "any",
-      resource: "Campaign",
+      resource: "Project",
     });
-    const results = await this.service.findCampaigns(parent.id, args);
+    const results = await this.service.findProjects(parent.id, args);
 
     if (!results) {
       return [];
     }
 
     return results.map((result) => permission.filter(result));
-  }
-
-  @graphql.ResolveField(() => [Order])
-  @nestAccessControl.UseRoles({
-    resource: "User",
-    action: "read",
-    possession: "any",
-  })
-  async orders(
-    @graphql.Parent() parent: User,
-    @graphql.Args() args: OrderFindManyArgs,
-    @gqlUserRoles.UserRoles() userRoles: string[]
-  ): Promise<Order[]> {
-    const permission = this.rolesBuilder.permission({
-      role: userRoles,
-      action: "read",
-      possession: "any",
-      resource: "Order",
-    });
-    const results = await this.service.findOrders(parent.id, args);
-
-    if (!results) {
-      return [];
-    }
-
-    return results.map((result) => permission.filter(result));
-  }
-
-  @graphql.ResolveField(() => CampaignApplication, { nullable: true })
-  @nestAccessControl.UseRoles({
-    resource: "User",
-    action: "read",
-    possession: "any",
-  })
-  async campaignApplication(
-    @graphql.Parent() parent: User,
-    @gqlUserRoles.UserRoles() userRoles: string[]
-  ): Promise<CampaignApplication | null> {
-    const permission = this.rolesBuilder.permission({
-      role: userRoles,
-      action: "read",
-      possession: "any",
-      resource: "CampaignApplication",
-    });
-    const result = await this.service.getCampaignApplication(parent.id);
-
-    if (!result) {
-      return null;
-    }
-    return permission.filter(result);
   }
 }

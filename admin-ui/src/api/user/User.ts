@@ -1,15 +1,11 @@
-import { CampaignApplication } from "../campaignApplication/CampaignApplication";
-import { Campaign } from "../campaign/Campaign";
-import { Order } from "../order/Order";
+import { Project } from "../project/Project";
 
 export type User = {
-  campaignApplication?: CampaignApplication | null;
-  campaigns?: Array<Campaign>;
   createdAt: Date;
   firstName: string | null;
   id: string;
   lastName: string | null;
-  orders?: Array<Order>;
+  projects?: Array<Project>;
   roles: Array<string>;
   updatedAt: Date;
   username: string;
