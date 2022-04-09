@@ -1,14 +1,14 @@
 {
-  "dataServiceGeneratorVersion": "0.12.1",
+  "dataServiceGeneratorVersion": "0.12.3",
   "appInfo": {
     "name": "mock tst",
     "description": "",
-    "version": "d6cddhjr",
+    "version": "d2540gjt",
     "id": "cl12bsddc90756401s60bnor011",
     "url": "https://app.amplication.com/cl12bsddc90756401s60bnor011",
     "settings": {
       "dbHost": "localhost",
-      "dbName": "mocker",
+      "dbName": "creat",
       "dbPassword": "admin",
       "dbPort": 5432,
       "dbUser": "admin",
