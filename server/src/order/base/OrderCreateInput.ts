@@ -11,34 +11,67 @@ https://docs.amplication.com/docs/how-to/custom-code
   */
 import { InputType, Field } from "@nestjs/graphql";
 import { ApiProperty } from "@nestjs/swagger";
-import { SubscriptionWhereUniqueInput } from "../../subscription/base/SubscriptionWhereUniqueInput";
-import { ValidateNested, IsOptional } from "class-validator";
+import { CustomerWhereUniqueInput } from "../../customer/base/CustomerWhereUniqueInput";
+import { ValidateNested, IsOptional, IsNumber, IsInt } from "class-validator";
 import { Type } from "class-transformer";
-import { UserWhereUniqueInput } from "../../user/base/UserWhereUniqueInput";
+import { ProductWhereUniqueInput } from "../../product/base/ProductWhereUniqueInput";
 @InputType()
 class OrderCreateInput {
   @ApiProperty({
     required: false,
-    type: () => SubscriptionWhereUniqueInput,
+    type: () => CustomerWhereUniqueInput,
   })
   @ValidateNested()
-  @Type(() => SubscriptionWhereUniqueInput)
+  @Type(() => CustomerWhereUniqueInput)
   @IsOptional()
-  @Field(() => SubscriptionWhereUniqueInput, {
+  @Field(() => CustomerWhereUniqueInput, {
     nullable: true,
   })
-  subscription?: SubscriptionWhereUniqueInput | null;
+  customer?: CustomerWhereUniqueInput | null;
 
   @ApiProperty({
     required: false,
-    type: () => UserWhereUniqueInput,
+    type: Number,
   })
-  @ValidateNested()
-  @Type(() => UserWhereUniqueInput)
+  @IsNumber()
   @IsOptional()
-  @Field(() => UserWhereUniqueInput, {
+  @Field(() => Number, {
     nullable: true,
   })
-  user?: UserWhereUniqueInput | null;
+  discount?: number | null;
+
+  @ApiProperty({
+    required: false,
+    type: () => ProductWhereUniqueInput,
+  })
+  @ValidateNested()
+  @Type(() => ProductWhereUniqueInput)
+  @IsOptional()
+  @Field(() => ProductWhereUniqueInput, {
+    nullable: true,
+  })
+  product?: ProductWhereUniqueInput | null;
+
+  @ApiProperty({
+    required: false,
+    type: Number,
+  })
+  @IsInt()
+  @IsOptional()
+  @Field(() => Number, {
+    nullable: true,
+  })
+  quantity?: number | null;
+
+  @ApiProperty({
+    required: false,
+    type: Number,
+  })
+  @IsInt()
+  @IsOptional()
+  @Field(() => Number, {
+    nullable: true,
+  })
+  totalPrice?: number | null;
 }
 export { OrderCreateInput };

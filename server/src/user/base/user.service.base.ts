@@ -10,13 +10,7 @@ https://docs.amplication.com/docs/how-to/custom-code
 ------------------------------------------------------------------------------
   */
 import { PrismaService } from "nestjs-prisma";
-import {
-  Prisma,
-  User,
-  Campaign,
-  Order,
-  CampaignApplication,
-} from "@prisma/client";
+import { Prisma, User } from "@prisma/client";
 import { PasswordService } from "../../auth/password.service";
 import { transformStringFieldUpdateInput } from "../../prisma.util";
 
@@ -76,37 +70,5 @@ export class UserServiceBase {
     args: Prisma.SelectSubset<T, Prisma.UserDeleteArgs>
   ): Promise<User> {
     return this.prisma.user.delete(args);
-  }
-
-  async findCampaigns(
-    parentId: string,
-    args: Prisma.CampaignFindManyArgs
-  ): Promise<Campaign[]> {
-    return this.prisma.user
-      .findUnique({
-        where: { id: parentId },
-      })
-      .campaigns(args);
-  }
-
-  async findOrders(
-    parentId: string,
-    args: Prisma.OrderFindManyArgs
-  ): Promise<Order[]> {
-    return this.prisma.user
-      .findUnique({
-        where: { id: parentId },
-      })
-      .orders(args);
-  }
-
-  async getCampaignApplication(
-    parentId: string
-  ): Promise<CampaignApplication | null> {
-    return this.prisma.user
-      .findUnique({
-        where: { id: parentId },
-      })
-      .campaignApplication();
   }
 }

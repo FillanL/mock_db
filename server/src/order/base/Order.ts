@@ -11,10 +11,17 @@ https://docs.amplication.com/docs/how-to/custom-code
   */
 import { ObjectType, Field } from "@nestjs/graphql";
 import { ApiProperty } from "@nestjs/swagger";
-import { IsDate, IsString, ValidateNested, IsOptional } from "class-validator";
+import {
+  IsDate,
+  ValidateNested,
+  IsOptional,
+  IsNumber,
+  IsString,
+  IsInt,
+} from "class-validator";
 import { Type } from "class-transformer";
-import { Subscription } from "../../subscription/base/Subscription";
-import { User } from "../../user/base/User";
+import { Customer } from "../../customer/base/Customer";
+import { Product } from "../../product/base/Product";
 @ObjectType()
 class Order {
   @ApiProperty({
@@ -26,6 +33,26 @@ class Order {
   createdAt!: Date;
 
   @ApiProperty({
+    required: false,
+    type: () => Customer,
+  })
+  @ValidateNested()
+  @Type(() => Customer)
+  @IsOptional()
+  customer?: Customer | null;
+
+  @ApiProperty({
+    required: false,
+    type: Number,
+  })
+  @IsNumber()
+  @IsOptional()
+  @Field(() => Number, {
+    nullable: true,
+  })
+  discount!: number | null;
+
+  @ApiProperty({
     required: true,
     type: String,
   })
@@ -35,12 +62,34 @@ class Order {
 
   @ApiProperty({
     required: false,
-    type: () => Subscription,
+    type: () => Product,
   })
   @ValidateNested()
-  @Type(() => Subscription)
+  @Type(() => Product)
   @IsOptional()
-  subscription?: Subscription | null;
+  product?: Product | null;
+
+  @ApiProperty({
+    required: false,
+    type: Number,
+  })
+  @IsInt()
+  @IsOptional()
+  @Field(() => Number, {
+    nullable: true,
+  })
+  quantity!: number | null;
+
+  @ApiProperty({
+    required: false,
+    type: Number,
+  })
+  @IsInt()
+  @IsOptional()
+  @Field(() => Number, {
+    nullable: true,
+  })
+  totalPrice!: number | null;
 
   @ApiProperty({
     required: true,
@@ -49,14 +98,5 @@ class Order {
   @Type(() => Date)
   @Field(() => Date)
   updatedAt!: Date;
-
-  @ApiProperty({
-    required: false,
-    type: () => User,
-  })
-  @ValidateNested()
-  @Type(() => User)
-  @IsOptional()
-  user?: User | null;
 }
 export { Order };

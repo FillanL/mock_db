@@ -1,7 +1,6 @@
 import { SortOrder } from "../../util/SortOrder";
 
 export type UserOrderByInput = {
-  campaignApplicationId?: SortOrder;
   createdAt?: SortOrder;
   firstName?: SortOrder;
   id?: SortOrder;

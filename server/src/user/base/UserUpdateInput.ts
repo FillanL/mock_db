@@ -11,37 +11,11 @@ https://docs.amplication.com/docs/how-to/custom-code
   */
 import { InputType, Field } from "@nestjs/graphql";
 import { ApiProperty } from "@nestjs/swagger";
-import { CampaignApplicationWhereUniqueInput } from "../../campaignApplication/base/CampaignApplicationWhereUniqueInput";
-import { ValidateNested, IsOptional, IsString } from "class-validator";
-import { Type } from "class-transformer";
-import { CampaignUpdateManyWithoutUsersInput } from "./CampaignUpdateManyWithoutUsersInput";
-import { OrderUpdateManyWithoutUsersInput } from "./OrderUpdateManyWithoutUsersInput";
+import { IsString, IsOptional, IsJSON } from "class-validator";
+import { GraphQLJSON } from "graphql-type-json";
+import { InputJsonValue } from "../../types";
 @InputType()
 class UserUpdateInput {
-  @ApiProperty({
-    required: false,
-    type: () => CampaignApplicationWhereUniqueInput,
-  })
-  @ValidateNested()
-  @Type(() => CampaignApplicationWhereUniqueInput)
-  @IsOptional()
-  @Field(() => CampaignApplicationWhereUniqueInput, {
-    nullable: true,
-  })
-  campaignApplication?: CampaignApplicationWhereUniqueInput | null;
-
-  @ApiProperty({
-    required: false,
-    type: () => CampaignUpdateManyWithoutUsersInput,
-  })
-  @ValidateNested()
-  @Type(() => CampaignUpdateManyWithoutUsersInput)
-  @IsOptional()
-  @Field(() => CampaignUpdateManyWithoutUsersInput, {
-    nullable: true,
-  })
-  campaigns?: CampaignUpdateManyWithoutUsersInput;
-
   @ApiProperty({
     required: false,
     type: String,
@@ -66,18 +40,6 @@ class UserUpdateInput {
 
   @ApiProperty({
     required: false,
-    type: () => OrderUpdateManyWithoutUsersInput,
-  })
-  @ValidateNested()
-  @Type(() => OrderUpdateManyWithoutUsersInput)
-  @IsOptional()
-  @Field(() => OrderUpdateManyWithoutUsersInput, {
-    nullable: true,
-  })
-  orders?: OrderUpdateManyWithoutUsersInput;
-
-  @ApiProperty({
-    required: false,
     type: String,
   })
   @IsString()
@@ -89,16 +51,13 @@ class UserUpdateInput {
 
   @ApiProperty({
     required: false,
-    type: [String],
   })
-  @IsString({
-    each: true,
-  })
+  @IsJSON()
   @IsOptional()
-  @Field(() => [String], {
+  @Field(() => GraphQLJSON, {
     nullable: true,
   })
-  roles?: Array<string>;
+  roles?: InputJsonValue;
 
   @ApiProperty({
     required: false,

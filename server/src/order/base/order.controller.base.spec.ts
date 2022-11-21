@@ -1,10 +1,18 @@
 import { Test } from "@nestjs/testing";
-import { INestApplication, HttpStatus, ExecutionContext } from "@nestjs/common";
+import {
+  INestApplication,
+  HttpStatus,
+  ExecutionContext,
+  CallHandler,
+} from "@nestjs/common";
 import request from "supertest";
 import { MorganModule } from "nest-morgan";
 import { ACGuard } from "nest-access-control";
 import { DefaultAuthGuard } from "../../auth/defaultAuth.guard";
 import { ACLModule } from "../../auth/acl.module";
+import { AclFilterResponseInterceptor } from "../../interceptors/aclFilterResponse.interceptor";
+import { AclValidateRequestInterceptor } from "../../interceptors/aclValidateRequest.interceptor";
+import { map } from "rxjs";
 import { OrderController } from "../order.controller";
 import { OrderService } from "../order.service";
 
@@ -12,24 +20,36 @@ const nonExistingId = "nonExistingId";
 const existingId = "existingId";
 const CREATE_INPUT = {
   createdAt: new Date(),
+  discount: 42.42,
   id: "exampleId",
+  quantity: 42,
+  totalPrice: 42,
   updatedAt: new Date(),
 };
 const CREATE_RESULT = {
   createdAt: new Date(),
+  discount: 42.42,
   id: "exampleId",
+  quantity: 42,
+  totalPrice: 42,
   updatedAt: new Date(),
 };
 const FIND_MANY_RESULT = [
   {
     createdAt: new Date(),
+    discount: 42.42,
     id: "exampleId",
+    quantity: 42,
+    totalPrice: 42,
     updatedAt: new Date(),
   },
 ];
 const FIND_ONE_RESULT = {
   createdAt: new Date(),
+  discount: 42.42,
   id: "exampleId",
+  quantity: 42,
+  totalPrice: 42,
   updatedAt: new Date(),
 };
 
@@ -65,6 +85,21 @@ const acGuard = {
   },
 };
 
+const aclFilterResponseInterceptor = {
+  intercept: (context: ExecutionContext, next: CallHandler) => {
+    return next.handle().pipe(
+      map((data) => {
+        return data;
+      })
+    );
+  },
+};
+const aclValidateRequestInterceptor = {
+  intercept: (context: ExecutionContext, next: CallHandler) => {
+    return next.handle();
+  },
+};
+
 describe("Order", () => {
   let app: INestApplication;
 
@@ -83,6 +118,10 @@ describe("Order", () => {
       .useValue(basicAuthGuard)
       .overrideGuard(ACGuard)
       .useValue(acGuard)
+      .overrideInterceptor(AclFilterResponseInterceptor)
+      .useValue(aclFilterResponseInterceptor)
+      .overrideInterceptor(AclValidateRequestInterceptor)
+      .useValue(aclValidateRequestInterceptor)
       .compile();
 
     app = moduleRef.createNestApplication();
@@ -117,9 +156,9 @@ describe("Order", () => {
   test("GET /orders/:id non existing", async () => {
     await request(app.getHttpServer())
       .get(`${"/orders"}/${nonExistingId}`)
-      .expect(404)
+      .expect(HttpStatus.NOT_FOUND)
       .expect({
-        statusCode: 404,
+        statusCode: HttpStatus.NOT_FOUND,
         message: `No resource was found for {"${"id"}":"${nonExistingId}"}`,
         error: "Not Found",
       });
