@@ -11,39 +11,12 @@ https://docs.amplication.com/docs/how-to/custom-code
   */
 import { InputType, Field } from "@nestjs/graphql";
 import { ApiProperty } from "@nestjs/swagger";
-import { CampaignApplicationWhereUniqueInput } from "../../campaignApplication/base/CampaignApplicationWhereUniqueInput";
-import { ValidateNested, IsOptional } from "class-validator";
-import { Type } from "class-transformer";
-import { CampaignListRelationFilter } from "../../campaign/base/CampaignListRelationFilter";
 import { StringNullableFilter } from "../../util/StringNullableFilter";
+import { Type } from "class-transformer";
+import { IsOptional } from "class-validator";
 import { StringFilter } from "../../util/StringFilter";
-import { OrderListRelationFilter } from "../../order/base/OrderListRelationFilter";
 @InputType()
 class UserWhereInput {
-  @ApiProperty({
-    required: false,
-    type: () => CampaignApplicationWhereUniqueInput,
-  })
-  @ValidateNested()
-  @Type(() => CampaignApplicationWhereUniqueInput)
-  @IsOptional()
-  @Field(() => CampaignApplicationWhereUniqueInput, {
-    nullable: true,
-  })
-  campaignApplication?: CampaignApplicationWhereUniqueInput;
-
-  @ApiProperty({
-    required: false,
-    type: () => CampaignListRelationFilter,
-  })
-  @ValidateNested()
-  @Type(() => CampaignListRelationFilter)
-  @IsOptional()
-  @Field(() => CampaignListRelationFilter, {
-    nullable: true,
-  })
-  campaigns?: CampaignListRelationFilter;
-
   @ApiProperty({
     required: false,
     type: StringNullableFilter,
@@ -76,18 +49,6 @@ class UserWhereInput {
     nullable: true,
   })
   lastName?: StringNullableFilter;
-
-  @ApiProperty({
-    required: false,
-    type: () => OrderListRelationFilter,
-  })
-  @ValidateNested()
-  @Type(() => OrderListRelationFilter)
-  @IsOptional()
-  @Field(() => OrderListRelationFilter, {
-    nullable: true,
-  })
-  orders?: OrderListRelationFilter;
 
   @ApiProperty({
     required: false,

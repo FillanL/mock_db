@@ -1,10 +1,13 @@
-import { Subscription } from "../subscription/Subscription";
-import { User } from "../user/User";
+import { Customer } from "../customer/Customer";
+import { Product } from "../product/Product";
 
 export type Order = {
   createdAt: Date;
+  customer?: Customer | null;
+  discount: number | null;
   id: string;
-  subscription?: Subscription | null;
+  product?: Product | null;
+  quantity: number | null;
+  totalPrice: number | null;
   updatedAt: Date;
-  user?: User | null;
 };

@@ -11,37 +11,11 @@ https://docs.amplication.com/docs/how-to/custom-code
   */
 import { InputType, Field } from "@nestjs/graphql";
 import { ApiProperty } from "@nestjs/swagger";
-import { CampaignApplicationWhereUniqueInput } from "../../campaignApplication/base/CampaignApplicationWhereUniqueInput";
-import { ValidateNested, IsOptional, IsString } from "class-validator";
-import { Type } from "class-transformer";
-import { CampaignCreateNestedManyWithoutUsersInput } from "./CampaignCreateNestedManyWithoutUsersInput";
-import { OrderCreateNestedManyWithoutUsersInput } from "./OrderCreateNestedManyWithoutUsersInput";
+import { IsString, IsOptional, IsJSON } from "class-validator";
+import { GraphQLJSON } from "graphql-type-json";
+import { InputJsonValue } from "../../types";
 @InputType()
 class UserCreateInput {
-  @ApiProperty({
-    required: false,
-    type: () => CampaignApplicationWhereUniqueInput,
-  })
-  @ValidateNested()
-  @Type(() => CampaignApplicationWhereUniqueInput)
-  @IsOptional()
-  @Field(() => CampaignApplicationWhereUniqueInput, {
-    nullable: true,
-  })
-  campaignApplication?: CampaignApplicationWhereUniqueInput | null;
-
-  @ApiProperty({
-    required: false,
-    type: () => CampaignCreateNestedManyWithoutUsersInput,
-  })
-  @ValidateNested()
-  @Type(() => CampaignCreateNestedManyWithoutUsersInput)
-  @IsOptional()
-  @Field(() => CampaignCreateNestedManyWithoutUsersInput, {
-    nullable: true,
-  })
-  campaigns?: CampaignCreateNestedManyWithoutUsersInput;
-
   @ApiProperty({
     required: false,
     type: String,
@@ -65,18 +39,6 @@ class UserCreateInput {
   lastName?: string | null;
 
   @ApiProperty({
-    required: false,
-    type: () => OrderCreateNestedManyWithoutUsersInput,
-  })
-  @ValidateNested()
-  @Type(() => OrderCreateNestedManyWithoutUsersInput)
-  @IsOptional()
-  @Field(() => OrderCreateNestedManyWithoutUsersInput, {
-    nullable: true,
-  })
-  orders?: OrderCreateNestedManyWithoutUsersInput;
-
-  @ApiProperty({
     required: true,
     type: String,
   })
@@ -86,13 +48,10 @@ class UserCreateInput {
 
   @ApiProperty({
     required: true,
-    type: [String],
   })
-  @IsString({
-    each: true,
-  })
-  @Field(() => [String])
-  roles!: Array<string>;
+  @IsJSON()
+  @Field(() => GraphQLJSON)
+  roles!: InputJsonValue;
 
   @ApiProperty({
     required: true,

@@ -11,31 +11,12 @@ https://docs.amplication.com/docs/how-to/custom-code
   */
 import { ObjectType, Field } from "@nestjs/graphql";
 import { ApiProperty } from "@nestjs/swagger";
-import { CampaignApplication } from "../../campaignApplication/base/CampaignApplication";
-import { ValidateNested, IsOptional, IsDate, IsString } from "class-validator";
+import { IsDate, IsString, IsOptional, IsJSON } from "class-validator";
 import { Type } from "class-transformer";
-import { Campaign } from "../../campaign/base/Campaign";
-import { Order } from "../../order/base/Order";
+import { GraphQLJSON } from "graphql-type-json";
+import { JsonValue } from "type-fest";
 @ObjectType()
 class User {
-  @ApiProperty({
-    required: false,
-    type: () => CampaignApplication,
-  })
-  @ValidateNested()
-  @Type(() => CampaignApplication)
-  @IsOptional()
-  campaignApplication?: CampaignApplication | null;
-
-  @ApiProperty({
-    required: false,
-    type: () => [Campaign],
-  })
-  @ValidateNested()
-  @Type(() => Campaign)
-  @IsOptional()
-  campaigns?: Array<Campaign>;
-
   @ApiProperty({
     required: true,
   })
@@ -75,23 +56,11 @@ class User {
   lastName!: string | null;
 
   @ApiProperty({
-    required: false,
-    type: () => [Order],
-  })
-  @ValidateNested()
-  @Type(() => Order)
-  @IsOptional()
-  orders?: Array<Order>;
-
-  @ApiProperty({
     required: true,
-    type: [String],
   })
-  @IsString({
-    each: true,
-  })
-  @Field(() => [String])
-  roles!: Array<string>;
+  @IsJSON()
+  @Field(() => GraphQLJSON)
+  roles!: JsonValue;
 
   @ApiProperty({
     required: true,

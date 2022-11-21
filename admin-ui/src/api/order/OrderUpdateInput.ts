@@ -1,7 +1,10 @@
-import { SubscriptionWhereUniqueInput } from "../subscription/SubscriptionWhereUniqueInput";
-import { UserWhereUniqueInput } from "../user/UserWhereUniqueInput";
+import { CustomerWhereUniqueInput } from "../customer/CustomerWhereUniqueInput";
+import { ProductWhereUniqueInput } from "../product/ProductWhereUniqueInput";
 
 export type OrderUpdateInput = {
-  subscription?: SubscriptionWhereUniqueInput | null;
-  user?: UserWhereUniqueInput | null;
+  customer?: CustomerWhereUniqueInput | null;
+  discount?: number | null;
+  product?: ProductWhereUniqueInput | null;
+  quantity?: number | null;
+  totalPrice?: number | null;
 };

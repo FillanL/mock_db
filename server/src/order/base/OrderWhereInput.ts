@@ -11,13 +11,38 @@ https://docs.amplication.com/docs/how-to/custom-code
   */
 import { InputType, Field } from "@nestjs/graphql";
 import { ApiProperty } from "@nestjs/swagger";
-import { StringFilter } from "../../util/StringFilter";
+import { CustomerWhereUniqueInput } from "../../customer/base/CustomerWhereUniqueInput";
+import { ValidateNested, IsOptional } from "class-validator";
 import { Type } from "class-transformer";
-import { IsOptional, ValidateNested } from "class-validator";
-import { SubscriptionWhereUniqueInput } from "../../subscription/base/SubscriptionWhereUniqueInput";
-import { UserWhereUniqueInput } from "../../user/base/UserWhereUniqueInput";
+import { FloatNullableFilter } from "../../util/FloatNullableFilter";
+import { StringFilter } from "../../util/StringFilter";
+import { ProductWhereUniqueInput } from "../../product/base/ProductWhereUniqueInput";
+import { IntNullableFilter } from "../../util/IntNullableFilter";
 @InputType()
 class OrderWhereInput {
+  @ApiProperty({
+    required: false,
+    type: () => CustomerWhereUniqueInput,
+  })
+  @ValidateNested()
+  @Type(() => CustomerWhereUniqueInput)
+  @IsOptional()
+  @Field(() => CustomerWhereUniqueInput, {
+    nullable: true,
+  })
+  customer?: CustomerWhereUniqueInput;
+
+  @ApiProperty({
+    required: false,
+    type: FloatNullableFilter,
+  })
+  @Type(() => FloatNullableFilter)
+  @IsOptional()
+  @Field(() => FloatNullableFilter, {
+    nullable: true,
+  })
+  discount?: FloatNullableFilter;
+
   @ApiProperty({
     required: false,
     type: StringFilter,
@@ -31,26 +56,36 @@ class OrderWhereInput {
 
   @ApiProperty({
     required: false,
-    type: () => SubscriptionWhereUniqueInput,
+    type: () => ProductWhereUniqueInput,
   })
   @ValidateNested()
-  @Type(() => SubscriptionWhereUniqueInput)
+  @Type(() => ProductWhereUniqueInput)
   @IsOptional()
-  @Field(() => SubscriptionWhereUniqueInput, {
+  @Field(() => ProductWhereUniqueInput, {
     nullable: true,
   })
-  subscription?: SubscriptionWhereUniqueInput;
+  product?: ProductWhereUniqueInput;
 
   @ApiProperty({
     required: false,
-    type: () => UserWhereUniqueInput,
+    type: IntNullableFilter,
   })
-  @ValidateNested()
-  @Type(() => UserWhereUniqueInput)
+  @Type(() => IntNullableFilter)
   @IsOptional()
-  @Field(() => UserWhereUniqueInput, {
+  @Field(() => IntNullableFilter, {
     nullable: true,
   })
-  user?: UserWhereUniqueInput;
+  quantity?: IntNullableFilter;
+
+  @ApiProperty({
+    required: false,
+    type: IntNullableFilter,
+  })
+  @Type(() => IntNullableFilter)
+  @IsOptional()
+  @Field(() => IntNullableFilter, {
+    nullable: true,
+  })
+  totalPrice?: IntNullableFilter;
 }
 export { OrderWhereInput };

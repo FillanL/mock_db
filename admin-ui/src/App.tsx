@@ -9,26 +9,22 @@ import { UserList } from "./user/UserList";
 import { UserCreate } from "./user/UserCreate";
 import { UserEdit } from "./user/UserEdit";
 import { UserShow } from "./user/UserShow";
-import { CampaignList } from "./campaign/CampaignList";
-import { CampaignCreate } from "./campaign/CampaignCreate";
-import { CampaignEdit } from "./campaign/CampaignEdit";
-import { CampaignShow } from "./campaign/CampaignShow";
-import { CampaignApplicationList } from "./campaignApplication/CampaignApplicationList";
-import { CampaignApplicationCreate } from "./campaignApplication/CampaignApplicationCreate";
-import { CampaignApplicationEdit } from "./campaignApplication/CampaignApplicationEdit";
-import { CampaignApplicationShow } from "./campaignApplication/CampaignApplicationShow";
-import { SubscriptionList } from "./subscription/SubscriptionList";
-import { SubscriptionCreate } from "./subscription/SubscriptionCreate";
-import { SubscriptionEdit } from "./subscription/SubscriptionEdit";
-import { SubscriptionShow } from "./subscription/SubscriptionShow";
-import { CouponList } from "./coupon/CouponList";
-import { CouponCreate } from "./coupon/CouponCreate";
-import { CouponEdit } from "./coupon/CouponEdit";
-import { CouponShow } from "./coupon/CouponShow";
 import { OrderList } from "./order/OrderList";
 import { OrderCreate } from "./order/OrderCreate";
 import { OrderEdit } from "./order/OrderEdit";
 import { OrderShow } from "./order/OrderShow";
+import { CustomerList } from "./customer/CustomerList";
+import { CustomerCreate } from "./customer/CustomerCreate";
+import { CustomerEdit } from "./customer/CustomerEdit";
+import { CustomerShow } from "./customer/CustomerShow";
+import { AddressList } from "./address/AddressList";
+import { AddressCreate } from "./address/AddressCreate";
+import { AddressEdit } from "./address/AddressEdit";
+import { AddressShow } from "./address/AddressShow";
+import { ProductList } from "./product/ProductList";
+import { ProductCreate } from "./product/ProductCreate";
+import { ProductEdit } from "./product/ProductEdit";
+import { ProductShow } from "./product/ProductShow";
 import { jwtAuthProvider } from "./auth-provider/ra-auth-jwt";
 
 const App = (): React.ReactElement => {
@@ -48,7 +44,7 @@ const App = (): React.ReactElement => {
   return (
     <div className="App">
       <Admin
-        title={"mock tst"}
+        title={"Sample service"}
         dataProvider={dataProvider}
         authProvider={jwtAuthProvider}
         theme={theme}
@@ -63,39 +59,32 @@ const App = (): React.ReactElement => {
           show={UserShow}
         />
         <Resource
-          name="Campaign"
-          list={CampaignList}
-          edit={CampaignEdit}
-          create={CampaignCreate}
-          show={CampaignShow}
-        />
-        <Resource
-          name="CampaignApplication"
-          list={CampaignApplicationList}
-          edit={CampaignApplicationEdit}
-          create={CampaignApplicationCreate}
-          show={CampaignApplicationShow}
-        />
-        <Resource
-          name="Subscription"
-          list={SubscriptionList}
-          edit={SubscriptionEdit}
-          create={SubscriptionCreate}
-          show={SubscriptionShow}
-        />
-        <Resource
-          name="Coupon"
-          list={CouponList}
-          edit={CouponEdit}
-          create={CouponCreate}
-          show={CouponShow}
-        />
-        <Resource
           name="Order"
           list={OrderList}
           edit={OrderEdit}
           create={OrderCreate}
           show={OrderShow}
+        />
+        <Resource
+          name="Customer"
+          list={CustomerList}
+          edit={CustomerEdit}
+          create={CustomerCreate}
+          show={CustomerShow}
+        />
+        <Resource
+          name="Address"
+          list={AddressList}
+          edit={AddressEdit}
+          create={AddressCreate}
+          show={AddressShow}
+        />
+        <Resource
+          name="Product"
+          list={ProductList}
+          edit={ProductEdit}
+          create={ProductCreate}
+          show={ProductShow}
         />
       </Admin>
     </div>

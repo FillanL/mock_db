@@ -1,14 +1,9 @@
-import { CampaignApplicationWhereUniqueInput } from "../campaignApplication/CampaignApplicationWhereUniqueInput";
-import { CampaignUpdateManyWithoutUsersInput } from "./CampaignUpdateManyWithoutUsersInput";
-import { OrderUpdateManyWithoutUsersInput } from "./OrderUpdateManyWithoutUsersInput";
+import { InputJsonValue } from "../../types";
 
 export type UserUpdateInput = {
-  campaignApplication?: CampaignApplicationWhereUniqueInput | null;
-  campaigns?: CampaignUpdateManyWithoutUsersInput;
   firstName?: string | null;
   lastName?: string | null;
-  orders?: OrderUpdateManyWithoutUsersInput;
   password?: string;
-  roles?: Array<string>;
+  roles?: InputJsonValue;
   username?: string;
 };
